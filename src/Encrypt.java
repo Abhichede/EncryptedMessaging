@@ -14,12 +14,12 @@ class Encrypt {
     String skeyString;
     static byte[] raw;
 
-    void generateSymmetricKey() {
+    void generateSymmetricKey( String keynum ) {
         try {
-            Random r = new Random();
-            int num = r.nextInt(10000);
-            String knum = String.valueOf(num);
-            byte[] knumb = knum.getBytes();
+            //Random r = new Random();
+            //int num = r.nextInt(10000);
+            //String knum = String.valueOf(num);
+            byte[] knumb = keynum.getBytes();
             skey=getRawKey(knumb);
             skeyString = new String(skey);
             System.out.println("DES Symmetric key = "+skeyString);
@@ -28,13 +28,10 @@ class Encrypt {
             System.out.println(e);
         }
     }
-    public byte[] retriveRawKey(){
-        if (raw == null){
-            generateSymmetricKey();
-            return raw;
-        }
+    public byte[] retriveRawKey(String keynum){
 
-        return raw;
+            generateSymmetricKey(keynum);
+            return raw;
     }
     private static byte[] getRawKey(byte[] seed) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("DES");

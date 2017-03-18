@@ -99,7 +99,8 @@ class ClientThread extends Thread
                 public void actionPerformed(ActionEvent e) {
                     try {
                         String inputMessage = clientInstance.txtMsgField.getText().toString();
-                        byte[] raw = encryptInstance.retriveRawKey();
+                        String keynum = JOptionPane.showInputDialog("Enter your key");
+                        byte[] raw = encryptInstance.retriveRawKey(keynum);
                         byte[] ibyte = inputMessage.getBytes();
                         ebyte = encryptInstance.encrypt(raw, ibyte);
                         String msg = new String(ebyte);
@@ -133,20 +134,16 @@ class ClientThread extends Thread
                 public void actionPerformed(ActionEvent e) {
                     try {
                         String inputMessage = JOptionPane.showInputDialog("Enter Encrypted Message");
-                        byte[] raw = encryptInstance.retriveRawKey();
+                        String keynum = JOptionPane.showInputDialog("Enter Key to Decrypt");
+                        byte[] raw = encryptInstance.retriveRawKey(keynum);
                         String decryptedMessage = null;
                         //byte[] ibyte = inputMessage.getBytes();
-                        if(new String(ebyte).equals(inputMessage)) {
                             byte[] dbyte = encryptInstance.decrypt(raw, ebyte);
                             decryptedMessage = new String(dbyte);
-                        }else{
-                            decryptedMessage = "Not decrypted or error in decryption \n" +
-                                    "Copy only very last message to decrypt";
-                        }
                         JOptionPane.showMessageDialog(clientInstance, decryptedMessage);
                     }catch (Exception e1){
-                        e1.printStackTrace();
-                        JOptionPane.showMessageDialog(clientInstance, e1);
+                        //e1.printStackTrace();
+                        JOptionPane.showMessageDialog(clientInstance, "Plz Enter a valid Key to decrypt msg \n OR \n unable to decrypt with this key");
                     }
                 }
             });
