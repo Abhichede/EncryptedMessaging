@@ -1,6 +1,4 @@
-/**
- * Created by Abhijit on 6/3/17.
- */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -62,6 +60,10 @@ class ClientThread extends Thread
     Client clientInstance = null;
     Encrypt encryptInstance = null;
     static byte[] ebyte = null;
+    String msg = null;
+    String username = null;
+    ClientThread currentThread = null;
+
     public ClientThread(Socket socket,ClientThread[] th, Client[] client, Client clientInstance, Encrypt encryptInstance)
     {
         this.socket=socket;
@@ -72,9 +74,7 @@ class ClientThread extends Thread
     }
     public void run()
     {
-        String msg;
-        String username;
-        ClientThread currentThread = this;
+        currentThread = this;
         try
         {
             clientInstance.setVisible(true);
@@ -93,6 +93,7 @@ class ClientThread extends Thread
                     client[i].txtMessage.append("\n------------A new user arrived in chat Room:" + username);
                 }
 
+                /* Change this Encrypt function*/
 
             clientInstance.btnEncrypt.addActionListener(new ActionListener() {
                 @Override
@@ -128,6 +129,8 @@ class ClientThread extends Thread
                     clientInstance.txtMsgField.setText("");
                 }
             });
+
+            /* Change this Decrypt function*/
 
             clientInstance.btnDecrypt.addActionListener(new ActionListener() {
                 @Override

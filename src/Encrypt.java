@@ -1,6 +1,4 @@
-/**
- * Created by Abhijit on 6/3/17.
- */
+
 import java.security.SecureRandom;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -16,20 +14,17 @@ class Encrypt {
 
     void generateSymmetricKey( String keynum ) {
         try {
-            //Random r = new Random();
-            //int num = r.nextInt(10000);
-            //String knum = String.valueOf(num);
+
+
             byte[] knumb = keynum.getBytes();
             skey=getRawKey(knumb);
             skeyString = new String(skey);
-            System.out.println("DES Symmetric key = "+skeyString);
         }
         catch(Exception e) {
             System.out.println(e);
         }
     }
     public byte[] retriveRawKey(String keynum){
-
             generateSymmetricKey(keynum);
             return raw;
     }
